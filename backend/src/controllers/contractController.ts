@@ -18,8 +18,17 @@ export const ContractController = {
         res.status(400).json({ message: "Title and content are required" });
       }
 
-      const contract = await contractService.create(userId, { title, content });
-      res.status(201).json(contract);
+      const smartContract = await contractService.deployContract({ userId });
+
+      console.log("Smart contract: deployed", smartContract);
+
+      await smartContract.terminateContract();
+
+      const isContractActive = await smartContract.isContractActive();
+      console.log("Smart contract: IS ACTIVE", isContractActive);
+
+      // const contract = await contractService.createContract(userId, { title, content });
+      res.status(201).json({ message: "ok" });
     } catch (error) {
       res.status(500).json({ message: (error as Error).message });
     }

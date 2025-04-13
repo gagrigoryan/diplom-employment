@@ -1,6 +1,9 @@
 **/node_modules/
 **/prisma/migrations
 
+./smart-contracts/artifacts
+./smart-contracts/cache
+
 
 **/.env
 
