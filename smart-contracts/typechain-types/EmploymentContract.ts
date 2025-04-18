@@ -27,9 +27,11 @@ export interface EmploymentContractInterface extends Interface {
   getFunction(
     nameOrSignature:
       | "activateContract"
+      | "agreementHash"
       | "employee"
       | "employer"
       | "endDate"
+      | "getContractAgreementHash"
       | "head"
       | "isActive"
       | "isContractActive"
@@ -48,9 +50,17 @@ export interface EmploymentContractInterface extends Interface {
     functionFragment: "activateContract",
     values?: undefined
   ): string;
+  encodeFunctionData(
+    functionFragment: "agreementHash",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "employee", values?: undefined): string;
   encodeFunctionData(functionFragment: "employer", values?: undefined): string;
   encodeFunctionData(functionFragment: "endDate", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "getContractAgreementHash",
+    values?: undefined
+  ): string;
   encodeFunctionData(functionFragment: "head", values?: undefined): string;
   encodeFunctionData(functionFragment: "isActive", values?: undefined): string;
   encodeFunctionData(
@@ -78,9 +88,17 @@ export interface EmploymentContractInterface extends Interface {
     functionFragment: "activateContract",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(
+    functionFragment: "agreementHash",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "employee", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "employer", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "endDate", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "getContractAgreementHash",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "head", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "isActive", data: BytesLike): Result;
   decodeFunctionResult(
@@ -168,11 +186,15 @@ export interface EmploymentContract extends BaseContract {
 
   activateContract: TypedContractMethod<[], [void], "nonpayable">;
 
+  agreementHash: TypedContractMethod<[], [string], "view">;
+
   employee: TypedContractMethod<[], [string], "view">;
 
   employer: TypedContractMethod<[], [string], "view">;
 
   endDate: TypedContractMethod<[], [bigint], "view">;
+
+  getContractAgreementHash: TypedContractMethod<[], [string], "view">;
 
   head: TypedContractMethod<[], [string], "view">;
 
@@ -210,6 +232,9 @@ export interface EmploymentContract extends BaseContract {
     nameOrSignature: "activateContract"
   ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "agreementHash"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "employee"
   ): TypedContractMethod<[], [string], "view">;
   getFunction(
@@ -218,6 +243,9 @@ export interface EmploymentContract extends BaseContract {
   getFunction(
     nameOrSignature: "endDate"
   ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "getContractAgreementHash"
+  ): TypedContractMethod<[], [string], "view">;
   getFunction(
     nameOrSignature: "head"
   ): TypedContractMethod<[], [string], "view">;

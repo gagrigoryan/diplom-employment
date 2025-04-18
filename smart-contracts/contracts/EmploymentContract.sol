@@ -34,6 +34,7 @@ contract EmploymentContract {
     address public employee;
     uint48 public startDate;
     bool public isActive;
+    bytes32 public agreementHash;
 
     Salary public salary;
     SickLeave public sickLeave;
@@ -41,6 +42,7 @@ contract EmploymentContract {
     constructor(
         address _employer,
         address _employee,
+        bytes32 _agreementHash,
         uint48 _startDate,
         uint48 _endDate,
         uint48 _salaryPerMonth,
@@ -49,6 +51,7 @@ contract EmploymentContract {
         head = msg.sender;
         employer = _employer;
         employee = _employee;
+        agreementHash = _agreementHash;
         startDate = _startDate;
         endDate = _endDate;
         isActive = true;
@@ -94,6 +97,10 @@ contract EmploymentContract {
 
     function terminateContract() public onlyEmployer {
         isActive = false;
+    }
+
+    function getContractAgreementHash() public view returns (bytes32) {
+        return (agreementHash);
     }
 
     function paySalary() public payable onlyEmployer activeContract {

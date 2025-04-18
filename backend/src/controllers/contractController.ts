@@ -20,12 +20,7 @@ export const ContractController = {
 
       const smartContract = await contractService.deployContract({ userId });
 
-      console.log("Smart contract: deployed", smartContract);
-
       await smartContract.terminateContract();
-
-      const isContractActive = await smartContract.isContractActive();
-      console.log("Smart contract: IS ACTIVE", isContractActive);
 
       // const contract = await contractService.createContract(userId, { title, content });
       res.status(201).json({ message: "ok" });
