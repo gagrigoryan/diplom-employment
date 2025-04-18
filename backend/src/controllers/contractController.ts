@@ -18,9 +18,10 @@ export const ContractController = {
         res.status(400).json({ message: "Title and content are required" });
       }
 
-      const smartContract = await contractService.deployContract({ userId });
-
-      await smartContract.terminateContract();
+      const smartContract = await contractService.deployContract({
+        userId,
+        content,
+      });
 
       // const contract = await contractService.createContract(userId, { title, content });
       res.status(201).json({ message: "ok" });

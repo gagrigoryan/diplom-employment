@@ -26,7 +26,13 @@ export const contractService = {
     });
   },
 
-  async deployContract({ userId }: { userId: number }) {
+  async deployContract({
+    userId,
+    content,
+  }: {
+    userId: number;
+    content: string;
+  }) {
     const user = await prisma.user.findUnique({ where: { id: userId } });
 
     if (!user || !user.walletAddress) {
@@ -44,9 +50,12 @@ export const contractService = {
     const salaryPerMonth = 3000;
     const totalSickDays = 12;
 
+    const encryptedContent = ethers.keccak256(ethers.toUtf8Bytes(content));
+
     const contract = await factory.deploy(
       wallet,
       user.walletAddress,
+      encryptedContent,
       startDate,
       endDate,
       salaryPerMonth,
