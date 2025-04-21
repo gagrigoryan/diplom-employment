@@ -4,8 +4,13 @@ import { UserController } from "../controllers/userController";
 
 const router = Router();
 
+router.get(
+  "/wallet/nonce",
+  passport.authenticate("jwt", { session: false }),
+  UserController.getWalletNonce,
+);
 router.post(
-  "/attachWallet",
+  "/wallet/attach",
   passport.authenticate("jwt", { session: false }),
   UserController.attachWallet,
 );
